@@ -1,7 +1,59 @@
 \documentclass[knowledge.tex]{subfiles}
 
-
 \begin{document}
     \section{Bubble Sort}
-    Kakaroto
+    Sortowanie bąbelkowe, to prosty algorytm sortowania, który wielokrotnie przechodzi przez listę, porównuje sąsiadujące elementy i zamienia je, jeśli są w niewłaściwej kolejności. Przejście przez listę jest powtarzane do momentu posortowania listy. Algorytm nazywa się bąbelkowym, gdyż w każdym kolejnym przejściu przez listę największy możliwy element \textit{wypływa do góry} jak bąbelek w wodzie.
+    
+    \subsection*{Przykład krok po kroku}
+    Weźmy pod uwagę listę liczb ( 5 1 4 2 8 ) i posortujmy ją od najmniejszej do największej wartości przy użyciu sortowania bąbelkowego. W każdym kroku aktualnie porównywane elementy będę zapisane pogrubioną czcionką.\\[0.3cm]
+    \textbf{Pierwsze przejście:}
+    \begin{addmargin}[2em]{0em}
+        ( \textbf{5 1} 4 2 8 ) $\rightarrow$ ( \textbf{1 5} 4 2 8 ) Algorytm porównuje piątkę z jedynką, a następnie zamienia je, gdyż piątka jest większa od jedynki.\\[0.1cm]
+        ( 1 \textbf{5 4} 2 8 ) $\rightarrow$ ( 1 \textbf{4 5} 2 8 ) Algorytm porównuje piątkę z czwórką, a następnie zamienia je, gdyż piątka jest większa od czwórki.\\[0.1cm]
+        ( 1 4 \textbf{5 2} 8 ) $\rightarrow$ ( 1 4 \textbf{2 5} 8 ) Algorytm porównuje piątkę z dwójką, a następnie zamienia je, gdyż piątka jest większa od dwójki.\\[0.1cm]
+        ( 1 4 2 \textbf{5 8} ) $\rightarrow$ ( 1 4 2 \textbf{5 8} ) Algorytm porównuje piątkę z ósemką, a następnie pozostawia je w tej samej kolejności, gdyż piątka jest mniejsza od ósemki.\\[0.1cm]
+    \end{addmargin}
+    \textbf{Drugie przejście:}
+    \begin{addmargin}[2em]{0em}
+        ( \textbf{1 4} 2 5 8 ) $\rightarrow$ ( \textbf{1 4} 2 5 8 ) Algorytm porównuje jedynkę z czwórką, a następnie pozostawia je w tej samej kolejności, gdyż jedynka jest mniejsza od czwórki.\\[0.1cm]
+        ( 1 \textbf{4 2} 5 8 ) $\rightarrow$ ( 1 \textbf{2 4} 5 8 ) Algorytm porównuje czwórkę z dwójką, a następnie zamienia je, gdyż dwójka jest mniejsza od czwórki.\\[0.1cm]
+        ( 1 2 \textbf{4 5} 8 ) $\rightarrow$ ( 1 2 \textbf{4 5} 8 ) Algorytm porównuje czwórkę z piątką, a następnie pozostawia je w tej samej kolejności, gdyż czwórka jest mniejsza od piątki.\\[0.1cm]
+        ( 1 2 4 \textbf{5 8} ) $\rightarrow$ ( 1 2 4 \textbf{5 8} ) Algorytm porównuje piątkę z ósemką, a następnie pozostawia je w tej samej kolejności, gdyż ósemka jest większa od piątki.\\[0.1cm]
+    \end{addmargin}
+    \textbf{Trzecie przejście:}
+    \begin{addmargin}[2em]{0em}
+        ( \textbf{1 2} 4 5 8 ) $\rightarrow$ ( \textbf{1 2} 4 5 8 ) Algorytm porównuje jedynkę z czwórką, a następnie pozostawia je w tej samej kolejności, gdyż jedynka jest mniejsza od dwójki.\\[0.1cm]
+        ( 1 \textbf{2 4} 5 8 ) $\rightarrow$ ( 1 \textbf{2 4} 5 8 ) Algorytm porównuje czwórkę z dwójką, a następnie pozostawia je w tej samej kolejności, gdyż dwójka jest mniejsza od czwórki.\\[0.1cm]
+        ( 1 2 \textbf{4 5} 8 ) $\rightarrow$ ( 1 2 \textbf{4 5} 8 ) Algorytm porównuje czwórkę z piątką, a następnie pozostawia je w tej samej kolejności, gdyż czwórka jest mniejsza od piątki.\\[0.1cm]
+        ( 1 2 4 \textbf{5 8} ) $\rightarrow$ ( 1 2 4 \textbf{5 8} ) Algorytm porównuje piątkę z ósemką, a następnie pozostawia je w tej samej kolejności, gdyż piątka jest mniejsza od ósemki.\\[0.1cm]
+    \end{addmargin}
+    \subsection*{Analiza złożoności}
+    Zastanówmy się nad złożonością obliczeniową algorytmy sortowania bąbelkowego. Jednokrotne przejście przez listę o długości $N$ wymaga $N - 1$ porównań. Po każdym przejściu przez największy możliwy element przesuwany jest na odpowiednie miejsce. Weźmy pod uwagę najgorszy możliwy przypadek, w którym wejściowa lista jest odwrotnie posortowana, czyli jej elementy uporządkowane są w malejącej kolejności. Za przykład posłuży nam lista $( 8, 5, 4, 2, 1 )$.
+    \begin{addmargin}[2em]{0em}
+        \textbf{1:} $( 8, 5, 4, 2, 1 ) \rightarrow ( 5, 4, 2, 1, \textbf{8} )$ Po czterech porównaniach ósemka znalazła się na ostatnim miejscu listy.\\[0.1cm]
+        \textbf{2:} $( 5,4,2,1,8 ) \rightarrow ( 4, 2, 1, \textbf{5}, 8 )$ Po czterech porównaniach piątka znalazła się na drugim od końca miejscu.\\[0.1cm]
+        \textbf{3:} $( 4, 2, 1, 5, 8 ) \rightarrow ( 2, 1, \textbf{4}, 5, 8 )$ Po czterech porównaniach czwórka znalazła się na trzecim od końca miejscu.\\[0.1cm]
+        \textbf{4:} $( 2, 1, 4, 5, 8 ) \rightarrow ( 1, \textbf{2}, 4, 5, 8 )$ Po czterech porównaniach dwójka znalazła się na czwartym od końca miejscu.\\[0.1cm]
+        \textbf{5:} $( 1, 2, 4, 5, 8 ) \rightarrow ( \textbf{1}, 2, 4, 5, 8 )$ Po czterech porównaniach dwójka znalazła się na czwartym od końca miejscu.
+    \end{addmargin}
+    Na podstawie powyższego przykładu, możemy stwierdzić, że w najgorszym możliwym przypadku należy wykonać $N$ przejść przez listę, gdzie w każdym z nich należy wykonać $N - 1$ porównań. Zatem w celu przeprowadzenia sortowania przy użyciu tego algorytmu należy w najgorszym wypadku wykonać $N * (N - 1)$ porównań co równa się $N^2 - N$ porównań, co za pomocą notacji dużego $O$ złożoność obliczeniowa tego algorytmu to $O(N^2)$, gdzie $N$ to długość sortowanej listy.
+    
+    \subsection*{Pseudokod}
+    \begin{algorithm}[H]
+    \SetKwInOut{Input}{input}
+    \SetKwInOut{Output}{output}
+
+    \Input{List of comparable objects of length N. For example list of integers $( 5,4,2,1,8 )$}
+    \Output{Ordered input list in ascending order.  $( 1, 2, 4, 5, 8 )$}\\[0.3cm]
+    
+    \For{n \textbf{in} [0; N)} {
+        \For{i \textbf{in} [0; N - 1)}{
+            \If{values[i] \textbf{greater than} values[i + 1]}{
+                swap(values[i], values[i+1])
+            }
+        }
+    }
+    \caption{Bubble Sort}
+\end{algorithm}
+   
 \end{document}
