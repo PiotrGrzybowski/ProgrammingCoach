@@ -3,5 +3,244 @@
 
 \begin{document}
     \section{Quick Sort}
-    Kakaroto
+    Quicksort jest jak sama nazwa wskazuje szybkim algorytmem sortowania. Opracowany został przez brytyjskiego informatyka Tony'ego Hoare'a w 1959 i opublikowany w 1961. Nadal jest powszechnie stosowanym algorytmem sortowania.\\[0.3cm]
+    Quicksort to algorytm z rodziny \textbf{Dziel i Zwyciężaj}. Jego idea jest w zasadzie prosta. Działa on poprzez wybranie elementu jednego elementu z list, który nazwiemy \textbf{"pivot"} a następnie należy przenieść wartości mniejsze od pivota na lewą stronę od niego a większe na prawo. W tym momencie będziemy mieli gwarancję, że pivot znajduje się w odpowiednim miejscu. Następnie należy rekurencyjnie sortowanie lewej oraz prawej podlisty.
+
+    \subsection*{Przykład krok po kroku}
+    Weźmy pod uwagę listę liczb $(1, 8, 3, 9, 4, 5, 7)$ i posortujmy ją od najmniejszej do największej wartości przy użyciu sortowania szybkiego. W pierwszej kolejności przeanalizujemy procedure \textit{partition}, której zadaniem jest rozdzielenie elementów na liście w taki sposób, żeby wartości mniejsze od pivota znalazły się po jego lewej stronie natomiast większe po prawej. Jako pivot na tym etapie zawsze będziemy wybierać ostatni element listy czyli pierwszy od prawej.\\[0.3cm]
+    \textbf{Procedura Partition}\\[0.3cm]
+    Rozważana procedura korzysta z mechanizmu dwóch wskaźników przechodzących po sortowanej liście. Rozróżniać je będziemy jako górny wskaźnik \textit{i} oraz dolny wskaźnik \textit{j}. Na początku procedury wskaźnik górny będzie ustawiony na pierwszy element listy pod indeksem zerowym czyli $i = 0$, natomiast wskaźnik dolny będzie ustawiony przed listą, na indeks minus jeden. (Nie na ostatni element jak to działa w Python tylko na miejsce przed listą).\\[0,3cm]
+    
+    \begin{definition}[Procedura Partition]
+        Dopóki górny wskaźnik nie dojdzie do końca listy (do wartości pivot) wykonuj:
+    \begin{itemize}
+        \item Jeżeli wartość pod górnym wskaźnikiem jest mniejsza od pivot to przesuń dolny wskaźnik w prawo i zamień wartości pod wskaźnikami dolnym i górnym.
+        \item W przeciwnym wypadku nic nie rób.
+    \end{itemize}
+    \end{definition}
+    
+    \textbf{Pozycja początkowa}
+    \begin{center}
+        \begin{tabular}{|  c | c  c  c  c  c  c  c  c |}
+            \hline
+           i & & \downarrow &  &  &  &  &  &   \\ 
+             & & 1 & 8 & 3 & 9 & 4 & 5 & \underline{7} \\  
+           j & \uparrow &  &  &  &  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular}        
+    \end{center}
+    \textbf{Krok pierwszy}\\[0.3cm]
+    Wartość pod wskaźnikiem górnym jest mniejsza od pivota ($1 < 7$), więc przesuwamy wskaźnik dolnym i zamieniamy miejscami wartości między obydwoma wskaźnikami, czyli jedynkę samą ze sobą.
+    \begin{center}
+        \begin{tabular}{|c | c c c c c c c c|}
+            \hline
+           i & & \downarrow &  &  &  &  &  &   \\ 
+             & & \textbf{1} & 8 & 3 & 9 & 4 & 5 & \underline{7} \\  
+           j &  & \uparrow &  &  &  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular}     
+    \quad $\rightarrow$~~
+    \begin{tabular}{|c | c c c c c c c c|}
+            \hline
+           i & & \downarrow &  &  &  &  &  &   \\ 
+             & & 1 & 8 & 3 & 9 & 4 & 5 & \underline{7} \\  
+           j &  & \uparrow &  &  &  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular}
+    \end{center}
+    \textbf{Krok drugi}\\[0.3cm]
+    Ósemka jest większa od siódemki, zatem nie robimy nic.
+    \begin{center}
+        \begin{tabular}{|c | c c c c c c c c|}
+            \hline
+           i & &  & \downarrow &  &  &  &  &   \\ 
+             & & 1 & 8 & 3 & 9 & 4 & 5 & \underline{7} \\  
+           j &  & \uparrow &  &  &  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular}    
+    \quad $\rightarrow$~~
+    \begin{tabular}{|c | c c c c c c c c|}
+            \hline
+           i & &  & \downarrow &  &  &  &  &   \\ 
+             & & 1 & 8 & 3 & 9 & 4 & 5 & \underline{7} \\  
+           j &  & \uparrow &  &  &  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular}
+    \end{center}
+    \textbf{Krok trzeci}\\[0.3cm]
+    Trójka jest mniejsza od siódemki, zatem przesuwamy dolny wskaźnik i zamieniamy miejscami wartości spod obydwu wskaźników.
+    \begin{center}
+        \begin{tabular}{|c | c c c c c c c c|}
+            \hline
+           i & &  &  & \downarrow &  &  &  &   \\ 
+             & & 1 & 8 & 3 & 9 & 4 & 5 & \underline{7} \\  
+           j &  & \uparrow &  &  &  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular}    
+    \quad $\rightarrow$~~
+    \begin{tabular}{|c | c c c c c c c c|}
+            \hline
+           i & &  &  & \downarrow &  &  &  &   \\ 
+             & & 1 & \textbf{3} & \textbf{8} & 9 & 4 & 5 & \underline{7} \\  
+           j &  &  & \uparrow &  &  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular}
+    \end{center}
+    \textbf{Krok czwarty}\\[0.3cm]
+    Dziewiątka jest większa od pivota, więc nie robimy nic.
+    \begin{center}
+        \begin{tabular}{|c | c c c c c c c c|}
+            \hline
+           i & &  &  &  & \downarrow &  &  &   \\ 
+             & & 1 & 3 & 8 & 9 & 4 & 5 & \underline{7} \\  
+           j &  &  & \uparrow &  &  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular}    
+    \quad $\rightarrow$~~
+    \begin{tabular}{|c | c c c c c c c c|}
+            \hline
+           i & &  &  &  & \downarrow &  &  &   \\ 
+             & & 1 & 3 & 8 & 9 & 4 & 5 & \underline{7} \\  
+           j &  &  & \uparrow &  &  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular}    
+    \end{center}
+    \textbf{Krok piąty}\\[0.3cm]
+    Czwórka jest mniejsza od siódemki, zatem przesuwamy dolny wskaźnik w prawo i zamieniamy miejscami wartości spod obydwu wskaźników.
+    \begin{center}
+        \begin{tabular}{|c | c c c c c c c c|}
+            \hline
+           i & &  &  &  &  & \downarrow &  &   \\ 
+             & & 1 & 3 & 8 & 9 & 4 & 5 & \underline{7} \\  
+           j &  &  & \uparrow &  &  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular}    
+    \quad $\rightarrow$~~
+    \begin{tabular}{|c | c c c c c c c c|}
+            \hline
+           i & &  &  &  &  & \downarrow &  &   \\ 
+             & & 1 & 3 & \textbf{4} & 9 & \textbf{8} & 5 & \underline{7} \\  
+           j &  &  &  & \uparrow &  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular}    
+    \end{center}
+    \textbf{Krok szósty}\\[0.3cm]
+    Piątka jest mniejsza od siódemki, zatem przesuwamy dolny wskaźnik w prawo i zamieniamy miejscami wartości spod obydwu wskaźników.
+    \begin{center}
+        \begin{tabular}{|c | c c c c c c c c|}
+            \hline
+           i & &  &  &  &  &  & \downarrow &   \\ 
+             & & 1 & 3 & 4 & 9 & 8 & 5 & \underline{7} \\  
+           j &  &  &  & \uparrow &  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular}    
+    \quad $\rightarrow$~~
+    \begin{tabular}{|c | c c c c c c c c|}
+            \hline
+           i & &  &  &  &  &  & \downarrow &   \\ 
+             & & 1 & 3 & 4 & \textbf{5} & 8 & \textbf{9} & \underline{7} \\  
+           j &  &  &  & & \uparrow  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular}    
+    \end{center}
+    \textbf{Krok siódmy}\\[0.3cm]
+    Górny wskaźnik przeszedł do końca listy. Należy przesunąć dolny wskaźnik w prawo oraz zamienić miejscami pivot z wartością spod dolnego wskaźnika.
+    \begin{center}
+        \begin{tabular}{|c | c c c c c c c c|}
+            \hline
+           i & &  &  &  &  &  &  & \downarrow  \\ 
+             & & 1 & 3 & 4 & 5 & 8 & 9 & \underline{7} \\  
+           j &  &  &  & & \uparrow  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular} 
+    \quad $\rightarrow$~~
+    \begin{tabular}{|c | c c c c c| c| c c|}
+            \hline
+           i & &  &  &  &  &  &  & \downarrow  \\ 
+             & & 1 & 3 & 4 & 5 & \textbf{7} & 9 & \textbf{8} \\  
+           j &  &  &  & &   & \uparrow &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular} 
+    \end{center}
+    
+    \subsection*{Rekursywne wywołanie}
+    Po wykonaniu procedury \textit{partiton} mamy pewność, że element początkowo oznaczony jako pivot znajduje się na odpowiednim miejscu w tablicy. Następnie należy wywołać sortownie szybkie na lewej i prawej podtablicy.\\[0.3cm]
+    Należy jeszcze zastanowić się w jaki sposób wywoływać algorytm sortowania szybkiego, żeby zapewnić sortowanie w miejscu, tzn bez alokowania dodatkowej pamięci oraz nowych tablic. Rozwiązanie powinna nam sugerować implementacja procedury partition, która wykorzystuje dwa wskaźniki. Procedura \textit{quick\_sort} będzie przyjmować tablicę, którą chcemy posortować oraz dwa indeksy mówiące od którego do którego elementu chcemy posortować tablicę. W pierwszym wywołaniu ich wartości przyjmą 0 oraz $N-1$. Poniżej przykład drzewa wywołań \textit{quick\_sort} dla tablicy rozważanej wcześniej $(1, 8, 3, 9, 4, 5, 7)$
+    \begin{center}
+        \Tree 
+    [
+        .$qs((\underline{1,8,3,9,4,5,\textbf{7}}),0,6)$ 
+            [.$qs((\underline{1,3,4,\textbf{5}},...),0,3)$ 
+                [.$qs((\underline{1,3,\textbf{4}},...),0,2)$ ] 
+                [.$qs((...,\underline{\textbf{5}},),3,3)$ ]
+            ] 
+            [.$qs((...,\underline{9,\textbf{8}}),5,6)$
+                [.$qs((...,\underline{\textbf{8}},...),5,5)$ ]
+                [.$qs((...,\underline{\textbf{9}}),6,6)$ ]
+            ]
+    ]    
+    \end{center}
+    Na podstawie omówionego przykładu można zauważyć warunek kiedy konieczne jest kolejne wywołanie rekurencyjne algorytmu \textit{quick\_sort}.
+    
+    \begin{definition}[Quick Sort]
+    Dopóki lewy indeks jest mniejszy od prawego indeksu wykonaj procedurę partition i rekurencyjnie wywołaj sortowanie na lewo i na prawo od miejsca w którym został umieszczony pivot.
+    \end{definition}
+    
+    \subsection*{Analiza złożoności}
+    Zastanówmy się nad złożonością obliczeniową szybkiego algorytmu sortowania.
+    
+    \subsection*{Pseudokod}
+    
+    
+    \begin{algorithm}[H]
+    \SetKwInOut{Input}{input}
+    \SetKwInOut{Output}{output}
+
+    \Input{List of comparable objects of length N. For example list of integers $( 5,4,2,1,8 )$}
+    \Output{Ordered input list in ascending order.  $( 1, 2, 4, 5, 8 )$}\\[0.3cm]
+    
+    quick\_sort(values, i, j)
+    \Begin {
+    \If {i \textbf{less than} j} {
+        index = partition(values, i, j)\\
+        quick\_sort(values, i, index - 1)\\
+        quick\_sort(values, index + 1, j)
+    }
+    }
+    
+
+    \caption{Quick Sort}
+\end{algorithm}
+
+\subsection*{Zadania}
 \end{document}

@@ -1,0 +1,271 @@
+\documentclass[kslide.tex]{subfiles}
+
+\begin{document}
+\begin{frame}
+\frametitle{Quick Sort - Wprowadzenie}
+
+Quicksort jest jak sama nazwa wskazuje szybkim algorytmem sortowania. Opracowany został przez brytyjskiego informatyka Tony'ego Hoare'a w 1959 i opublikowany w 1961. Nadal jest powszechnie stosowanym algorytmem sortowania.\\[0.3cm]\pause
+Quicksort to algorytm z rodziny \textbf{Dziel i Zwyciężaj}.\\[0.3cm]\pause
+Jego idea jest w zasadzie prosta. Działa on poprzez wybranie elementu jednego elementu z list, który nazwiemy \textbf{"pivot"} a następnie należy przenieść wartości mniejsze od pivota na lewą stronę od niego a większe na prawo. W tym momencie będziemy mieli gwarancję, że pivot znajduje się w odpowiednim miejscu. Następnie należy rekurencyjnie sortowanie lewej oraz prawej podlisty.
+\end{frame}
+
+\begin{frame}
+\frametitle{Quick Sort - Procedura Partition}
+    Weźmy pod uwagę listę liczb $(1, 8, 3, 9, 4, 5, 7)$ i posortujmy ją od najmniejszej do największej wartości przy użyciu sortowania szybkiego.\\[0.3cm]\pausev 
+    W pierwszej kolejności przeanalizujemy procedure \textit{partition}, której zadaniem jest rozdzielenie elementów na liście w taki sposób, żeby wartości mniejsze od pivota znalazły się po jego lewej stronie natomiast większe po prawej. Jako pivot na tym etapie zawsze będziemy wybierać ostatni element listy czyli pierwszy od prawej.\\[0.3cm]
+\end{frame}
+
+\begin{frame}
+\frametitle{Quick Sort - Procedura Partition}
+\begin{itemize}
+    \item<1-> Rozważana procedura korzysta z mechanizmu dwóch wskaźników przechodzących po sortowanej liście.
+    \item<2-> Rozróżniać je będziemy jako górny wskaźnik \textit{i} oraz dolny wskaźnik \textit{j}.
+    \item<3-> Na początku procedury wskaźnik górny będzie ustawiony na pierwszy element listy pod indeksem zerowym czyli $i = 0$, natomiast wskaźnik dolny będzie ustawiony przed listą, na indeks minus jeden. (Nie na ostatni element jak to działa w Python tylko na miejsce przed listą).
+    
+    \end{itemize} 
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Quick Sort - Procedura Partition}
+        Dopóki górny wskaźnik nie dojdzie do końca listy (do wartości pivot) wykonuj:\\[0.3cm]
+        Jeżeli wartość pod górnym wskaźnikiem jest mniejsza od pivot to przesuń dolny wskaźnik w prawo i zamień wartości pod wskaźnikami dolnym i górnym.\\[0.3cm]
+        W przeciwnym wypadku nic nie rób.
+
+\end{frame}
+
+\begin{frame}{Quick Sort - Pozycja początkowa}
+    \begin{center}
+        \begin{tabular}{|  c | c  c  c  c  c  c  c  c |}
+            \hline
+           i & & \downarrow &  &  &  &  &  &   \\ 
+             & & 1 & 8 & 3 & 9 & 4 & 5 & \underline{7} \\  
+           j & \uparrow &  &  &  &  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular}        
+    \end{center}
+    
+    % Czwórka jest mniejsza od siódemki, zatem przesuwamy dolny wskaźnik w prawo i zamieniamy miejscami wartości spod obydwu wskaźników.
+    % \begin{center}
+    %     \begin{tabular}{|c | c c c c c c c c|}
+    %         \hline
+    %       i & &  &  &  &  & \downarrow &  &   \\ 
+    %          & & 1 & 3 & 8 & 9 & 4 & 5 & \underline{7} \\  
+    %       j &  &  & \uparrow &  &  &  &  &   \\
+    %   \hline
+    %   index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+    %   \hline
+    % \end{tabular}    
+    % \quad $\rightarrow$~~
+    % \begin{tabular}{|c | c c c c c c c c|}
+    %         \hline
+    %       i & &  &  &  &  & \downarrow &  &   \\ 
+    %          & & 1 & 3 & \textbf{4} & 9 & \textbf{8} & 5 & \underline{7} \\  
+    %       j &  &  &  & \uparrow &  &  &  &   \\
+    %   \hline
+    %   index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+    %   \hline
+    % \end{tabular}    
+    % \end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Quick Sort - Krok Pierwszy}
+    Przesuń górny wskaźnik.\\[0.3cm]
+    Wartość pod wskaźnikiem górnym jest mniejsza od pivota ($1 < 7$), więc
+    \begin{center}
+        \begin{tabular}{|c | c c c c c c c c|}
+            \hline
+           i & & \downarrow &  &  &  &  &  &   \\ 
+             & & \textbf{1} & 8 & 3 & 9 & 4 & 5 & \underline{7} \\  
+           j &  & \uparrow &  &  &  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular} 
+    \quad $\rightarrow$~~\pause
+    \begin{tabular}{|c | c c c c c c c c|}
+            \hline
+           i & & \downarrow &  &  &  &  &  &   \\ 
+             & & 1 & 8 & 3 & 9 & 4 & 5 & \underline{7} \\  
+           j &  & \uparrow &  &  &  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular}
+    \end{center}
+    przesuwamy wskaźnik dolny i zamieniamy miejscami wartości między obydwoma wskaźnikami, czyli jedynkę samą ze sobą.
+\end{frame}
+
+\begin{frame}
+\frametitle{Quick Sort - Krok Drugi}
+    Przesuń górny wskaźnik.\\[0.3cm]
+   Ósemka jest większa od siódemki, więc
+    \begin{center}
+        \begin{tabular}{|c | c c c c c c c c|}
+            \hline
+           i & &  & \downarrow &  &  &  &  &   \\ 
+             & & 1 & 8 & 3 & 9 & 4 & 5 & \underline{7} \\  
+           j &  & \uparrow &  &  &  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular}    
+    \quad $\rightarrow$~~\pause
+    \begin{tabular}{|c | c c c c c c c c|}
+            \hline
+           i & &  & \downarrow &  &  &  &  &   \\ 
+             & & 1 & 8 & 3 & 9 & 4 & 5 & \underline{7} \\  
+           j &  & \uparrow &  &  &  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular}
+    \end{center}
+    nie robimy nic.
+\end{frame}
+
+\begin{frame}
+\frametitle{Quick Sort - Krok Trzeci}
+   Przesuń górny wskaźnik.\\[0.3cm]   
+   Trójka jest mniejsza od siódemki, więc 
+    \begin{center}
+        \begin{tabular}{|c | c c c c c c c c|}
+            \hline
+           i & &  &  & \downarrow &  &  &  &   \\ 
+             & & 1 & 8 & 3 & 9 & 4 & 5 & \underline{7} \\  
+           j &  & \uparrow &  &  &  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular}    
+    \quad $\rightarrow$~~\pause
+    \begin{tabular}{|c | c c c c c c c c|}
+            \hline
+           i & &  &  & \downarrow &  &  &  &   \\ 
+             & & 1 & \textbf{3} & \textbf{8} & 9 & 4 & 5 & \underline{7} \\  
+           j &  &  & \uparrow &  &  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular}
+    \end{center}
+    przesuwamy dolny wskaźnik i zamieniamy miejscami wartości spod obydwu wskaźników.
+\end{frame}
+
+\begin{frame}
+\frametitle{Quick Sort - Krok Czwarty}
+    Przesuń górny wskaźnik.\\[0.3cm]   
+   Dziewiątka jest większa od pivota, więc 
+    \begin{center}
+        \begin{tabular}{|c | c c c c c c c c|}
+            \hline
+           i & &  &  &  & \downarrow &  &  &   \\ 
+             & & 1 & 3 & 8 & 9 & 4 & 5 & \underline{7} \\  
+           j &  &  & \uparrow &  &  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular}    
+    \quad $\rightarrow$~~\pause
+    \begin{tabular}{|c | c c c c c c c c|}
+            \hline
+           i & &  &  &  & \downarrow &  &  &   \\ 
+             & & 1 & 3 & 8 & 9 & 4 & 5 & \underline{7} \\  
+           j &  &  & \uparrow &  &  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular}    
+    \end{center}
+    nie robimy nic.
+\end{frame}
+
+\begin{frame}
+\frametitle{Quick Sort - Krok Piąty}
+    Przesuń górny wskaźnik.\\[0.3cm]   
+    Czwórka jest mniejsza od siódemki, 
+    \begin{center}
+        \begin{tabular}{|c | c c c c c c c c|}
+            \hline
+           i & &  &  &  &  & \downarrow &  &   \\ 
+             & & 1 & 3 & 8 & 9 & 4 & 5 & \underline{7} \\  
+           j &  &  & \uparrow &  &  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular}    
+    \quad $\rightarrow$~~\pause
+    \begin{tabular}{|c | c c c c c c c c|}
+            \hline
+           i & &  &  &  &  & \downarrow &  &   \\ 
+             & & 1 & 3 & \textbf{4} & 9 & \textbf{8} & 5 & \underline{7} \\  
+           j &  &  &  & \uparrow &  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular}    
+    \end{center}
+    zatem przesuwamy dolny wskaźnik w prawo i zamieniamy miejscami wartości spod obydwu wskaźników.
+\end{frame}
+
+\begin{frame}
+\frametitle{Quick Sort - Krok Szósty}
+      Przesuń górny wskaźnik.\\[0.3cm]   
+      Piątka jest mniejsza od siódemki, 
+    \begin{center}
+        \begin{tabular}{|c | c c c c c c c c|}
+            \hline
+           i & &  &  &  &  &  & \downarrow &   \\ 
+             & & 1 & 3 & 4 & 9 & 8 & 5 & \underline{7} \\  
+           j &  &  &  & \uparrow &  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular}    
+    \quad $\rightarrow$~~\pause
+    \begin{tabular}{|c | c c c c c c c c|}
+            \hline
+           i & &  &  &  &  &  & \downarrow &   \\ 
+             & & 1 & 3 & 4 & \textbf{5} & 8 & \textbf{9} & \underline{7} \\  
+           j &  &  &  & & \uparrow  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular}    
+    \end{center}
+    zatem przesuwamy dolny wskaźnik w prawo i zamieniamy miejscami wartości spod obydwu wskaźników.
+\end{frame}
+
+\begin{frame}
+\frametitle{Quick Sort - Krok Siódmy}
+      Przesuń górny wskaźnik.\\[0.3cm]  
+      Górny wskaźnik przeszedł do końca listy, więc 
+    \begin{center}
+        \begin{tabular}{|c | c c c c c c c c|}
+            \hline
+           i & &  &  &  &  &  &  & \downarrow  \\ 
+             & & 1 & 3 & 4 & 5 & 8 & 9 & \underline{7} \\  
+           j &  &  &  & & \uparrow  &  &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular} 
+    \quad $\rightarrow$~~\pause
+    \begin{tabular}{|c | c c c c c| c| c c|}
+            \hline
+           i & &  &  &  &  &  &  & \downarrow  \\ 
+             & & 1 & 3 & 4 & 5 & \textbf{7} & 9 & \textbf{8} \\  
+           j &  &  &  & &   & \uparrow &  &   \\
+      \hline
+      index & -1 & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+      \hline
+    \end{tabular} 
+    \end{center}
+    należy przesunąć dolny wskaźnik w prawo oraz zamienić miejscami pivot z wartością spod dolnego wskaźnika.\\ Wartości na lewo od pivota są mniejsze, natomiast wartości większe od pivota znajdują się na prawo.
+\end{frame}
+
+
+\end{document}
