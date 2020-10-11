@@ -17,7 +17,7 @@ class SortingAlgorithm(ABC):
         self.comparisons += 1
         return value_1 > value_2
 
-    def ge(self, value_1, value_2):
+    def gte(self, value_1, value_2):
         self.comparisons += 1
         return value_1 >= value_2
 
@@ -25,7 +25,7 @@ class SortingAlgorithm(ABC):
         self.comparisons += 1
         return value_1 < value_2
 
-    def le(self, value_1, value_2):
+    def lte(self, value_1, value_2):
         self.comparisons += 1
         return value_1 <= value_2
 
