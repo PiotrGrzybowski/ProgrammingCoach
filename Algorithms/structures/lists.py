@@ -50,9 +50,9 @@ class List(ABC, Generic[T]):
     def __setitem__(self, index: int, value: T) -> T:
         pass
 
-    @abstractmethod
-    def __iter__(self) -> Iterator[T]:
-        pass
+    # @abstractmethod
+    # def __iter__(self) -> Iterator[T]:
+    #     pass
 
     def __len__(self):
         return self.length()
