@@ -1,45 +1,64 @@
-\documentclass[knowledge.tex]{subfiles}
-
+\documentclass[kslide.tex]{subfiles}
 
 \begin{document}
-    \section{Insert Sort}
-    Sortowanie przez wstawianie, to prosty algorytm sortowania, który w każdym kolejnym kroku wstawia rozważany element na odpowiednie miejsce. Zaznaczmy jednak, że na początku nie wiemy jakie miejsce jest odpowiednie. Żeby zapewnić wymaganą stałą złożoność obliczeniową, czyli bez alokowania nowej pamięci do posortowania listy będziemy zamieniać kolejne wartości obok siebie, dopóki nie znajdzie się ona na odpowiednim miejscu. Algorytm będzie się zaczynał od drugiej pozycji, gdyż mamy pewność, że w przypadku jednoelementowej listy jest ona już posortowana. Po każdym z kolejnym przejściu, \textit{k} pierwszych elementów jest już posortowanych.\\[0.3cm]
-    
-    \subsection*{Przykład krok po kroku}
-    Weźmy pod uwagę listę liczb ( 5 1 4 2 8 ) i posortujmy ją od najmniejszej do największej wartości przy użyciu sortowania przez wstawianie. W każdym kroku aktualnie rozważana liczba będzie na początku podkreślona a następnie podczas porównywania liczby będą zapisane pogrubioną czcionką.\\[0.3cm]
-    \textbf{Pierwsze przejście:}
-    \begin{addmargin}[2em]{0em}
+
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Insert Sort}
+Sortowanie przez wstawianie, to prosty algorytm sortowania, który w każdym kolejnym kroku wstawia rozważany element na odpowiednie miejsce.\\[0.3cm]
+\pause
+ Zaznaczmy jednak, że na początku nie wiemy jakie miejsce jest odpowiednie. Żeby zapewnić wymaganą stałą złożoność obliczeniową, czyli bez alokowania nowej pamięci do posortowania listy będziemy zamieniać kolejne wartości obok siebie, dopóki nie znajdzie się ona na odpowiednim miejscu. \\[0.3cm]
+\pause
+Algorytm będzie się zaczynał od drugiej pozycji, gdyż mamy pewność, że w przypadku jednoelementowej listy jest ona już posortowana. Po każdym z kolejnym przejściu, \textit{k} pierwszych elementów jest już posortowanych.
+\end{frame}
+
+\begin{frame}
+\frametitle{Insert Sort - Przykład krok po kroku}
+Weźmy pod uwagę listę liczb ( 5 1 4 2 8 ) i posortujmy ją od najmniejszej do największej wartości przy użyciu sortowania przez wstawianie. W każdym kroku aktualnie rozważana liczba będzie na początku podkreślona a następnie podczas porównywania liczby będą zapisane pogrubioną czcionką.\\[0.3cm]\pause
+\textbf{Pierwsze przejście:}\\[0.1cm]
         $( 5, \textbf{\underline{1}}, 4, 2, 8 )$ Algorytm będzie wstawiał jedynkę z drugiego miejsca na odpowiednie miejsce.\\[0.1cm]
         $( \textbf{5 \underline{1}}, 4, 2, 8 ) \rightarrow ( \textbf{\underline{1}, 5}, 4, 2, 8 )$ Algorytm porównuje piątkę z jedynką, a następnie zamienia je, gdyż jedynka jest mniejsza od piątki.\\[0.1cm]
-    \end{addmargin}
-    \textbf{Drugie przejście:}
-    \begin{addmargin}[2em]{0em}
-        ( 1, 5, \textbf{\underline{4}}, 2, 8 ) Algorytm będzie wstawiał czwórkę z trzeciego miejsca na odpowiednie miejsce.\\[0.1cm]
+\end{frame}
+
+\begin{frame}
+\frametitle{Insert Sort - Przykład krok po kroku}
+\textbf{Drugie przejście:}\\[0.1cm]
+       ( 1, 5, \textbf{\underline{4}}, 2, 8 ) Algorytm będzie wstawiał czwórkę z trzeciego miejsca na odpowiednie miejsce.\\[0.1cm]
         $( 1, \textbf{5, \underline{4}}, 2, 8 ) \rightarrow ( 1, \textbf{\underline{4}, 5}, 2, 8 )$ Algorytm porównuje czwórkę z piątką, a następnie zamienia je, gdyż czwórka jest mniejsza od piątki.\\[0.1cm]
         $ ( \textbf{1, \underline{4}}, 5, 2, 8 ) \rightarrow ( \textbf{1, \underline{4}}, 5, 2, 8 )$ Algorytm porównuje czwórkę z jedynką, a następnie pozostawia je w tej samej kolejności, gdyż czwórka jest większa od jedynki.\\[0.1cm]
-        
-    \end{addmargin}
-    \textbf{Trzecie przejście:}
-    \begin{addmargin}[2em]{0em}
+\end{frame}
+
+\begin{frame}
+\frametitle{Insert Sort - Przykład krok po kroku}
+\textbf{Trzecie przejście:}\\[0.1cm]
         $( 1, 4, 5, \textbf{\underline{2}}, 8 )$ Algorytm będzie wstawiał dwójkę z czwartego miejsca na odpowiednie miejsce.\\[0.1cm]
         $( 1, 4, \textbf{5, \underline{2}}, 8 ) \rightarrow ( 1, 4, \textbf{\underline{2}, 5}, 8 )$ Algorytm porównuje dwójkę z piątką, a następnie zamienia je, gdyż dwójka jest mniejsza od piątki.\\[0.1cm]
         $( 1, \textbf{4, \underline{2}}, 5, 8 ) \rightarrow ( 1, \textbf{\underline{2}, 4}, 5, 8 )$ Algorytm porównuje dwójkę z czwórką, a następnie zamienia je, gdyż dwójka jest mniejsza od czwórki.\\[0.1cm]
         $( \textbf{1, \underline{2}}, 4, 5, 8 ) \rightarrow ( \textbf{1, \underline{2}}, 4, 5, 8 )$ Algorytm porównuje dwójkę z czwórką, a następnie pozostawia je w tej samej kolejności, gdyż dwójka jest większa od jedynki.\\[0.1cm]
-    \end{addmargin}
-    \textbf{Czwarte przejście:}
-    \begin{addmargin}[2em]{0em}
+\end{frame}
+
+\begin{frame}
+\frametitle{Insert Sort - Przykład krok po kroku}
+\textbf{Czwarte przejście:}\\[0.1cm]
         $( 1, 2, 4, 5, \textbf{\underline{8}} )$ Algorytm będzie wstawiał ósemkę z piątego miejsca na odpowiednie miejsce.\\[0.1cm]
         $( 1, 2, 4, \textbf{5, \underline{8}} ) \rightarrow ( 1, 2, 4, \textbf{5, \underline{8}} )$ Algorytm porównuje ósemkę z piątką, a następnie pozostawia je w tej samej kolejności, gdyż ósemka jest większa od piątki. W tym miejscu mamy pewność, ze wszystkie elementy na lewo od piątki są od niej mniejsze bądź równe, dlatego kończymy porównywanie.
-    \end{addmargin} 
-    \subsection*{Analiza złożoności}
-    Zastanówmy się nad złożonością obliczeniową algorytmy sortowania przez wstawianie. Przez założenie algorytmu przez wstawianie, musimy wstawić na odpowiednie miejsce $N - 1$ elementów. W najgorszym przypadku, kiedy lista jest uporządkowana malejąco lub innymi słowy odwrotnie posortowana w pierwszym wstawianiu trzeba wykonać jedno porównanie, w następnym dwa, w kolejnym trzy i tak dalej aż do $N - 1$ porównań. Suma od $1$ do $N-1$ to $(1 + (N - 1))*(N -1) / 2 = (N^2-N)/2$, co wyrażone w notacji dużego $O$ złożoność obliczeniowa tego algorytmu to $O(N^2)$, gdzie $N$ to długość sortowanej listy.
-    
-    \subsection*{Pseudokod}
+\end{frame}
+
+\begin{frame}
+\frametitle{Insert Sort - Analiza złożoności}
+    Zastanówmy się nad złożonością obliczeniową algorytmy sortowania przez wstawianie.\\[0.3cm]\pause
+    Przez założenie algorytmu przez wstawianie, musimy wstawić na odpowiednie miejsce $N - 1$ elementów. W najgorszym przypadku, kiedy lista jest uporządkowana malejąco lub innymi słowy odwrotnie posortowana w pierwszym wstawianiu trzeba wykonać jedno porównanie, w następnym dwa, w kolejnym trzy i tak dalej aż do $N - 1$ porównań.\\[0.3cm]\pause
+    Suma od $1$ do $N-1$ to $(1 + (N - 1))*(N -1) / 2 = (N^2-N)/2$, co wyrażone w notacji dużego $O$ złożoność obliczeniowa tego algorytmu to $O(N^2)$, gdzie $N$ to długość sortowanej listy.
+\end{frame}
+
+\begin{frame}
+\frametitle{Insert Sort - Pseudokod}
     \begin{algorithm}[H]
     \SetKwInOut{Input}{input}
     \SetKwInOut{Output}{output}
 
-    \Input{List of comparable objects of length N. For example list of integers $( 5,4,2,1,8 )$}
+    \Input{List of comparable objects of length N. $( 5,4,2,1,8 )$}
     \Output{Ordered input list in ascending order.  $( 1, 2, 4, 5, 8 )$}\\[0.3cm]
     
     \For{i \textbf{in} [1; N)} {
@@ -53,6 +72,7 @@
     }
     \caption{Insert Sort}
 \end{algorithm}
+\end{frame}
 
-\subsection*{Zadania}
+
 \end{document}
