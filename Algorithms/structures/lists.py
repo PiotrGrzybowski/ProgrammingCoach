@@ -1,6 +1,7 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
-from typing import Generic, Optional, Any, Iterator
+from dataclasses import dataclass
+from typing import Generic, Optional, Any, Generator
 
 from structures.types import T
 
@@ -50,9 +51,9 @@ class List(ABC, Generic[T]):
     def __setitem__(self, index: int, value: T) -> T:
         pass
 
-    # @abstractmethod
-    # def __iter__(self) -> Iterator[T]:
-    #     pass
+    @abstractmethod
+    def __iter__(self) -> Generator[T]:
+        pass
 
     def __len__(self):
         return self.length()
@@ -62,16 +63,14 @@ class List(ABC, Generic[T]):
 
 
 class LinkedList(List[T]):
+    @dataclass
     class Node(Generic[T]):
-        def __init__(self, value: T, next_node: Optional[LinkedList.Node] = None):
-            self.value = value
-            self.next = next_node
+        value: T
+        next: Optional[LinkedList.Node] = None
 
     def __init__(self, *args: T) -> None:
         self.head = None
-        if args:
-            for element in args:
-                self.append(element)
+        self._push_init_elements(args)
 
     def __str__(self) -> str:
         result = ''
@@ -95,14 +94,20 @@ class LinkedList(List[T]):
         self.head = None
 
     def append(self, element: T) -> None:
+        node = LinkedList.Node(element)
         if self.head is None:
-            self.head = LinkedList.Node(element)
+            self.head = node
         else:
             pointer = self.head
             while pointer.next is not None:
                 pointer = pointer.next
 
-            pointer.next = LinkedList.Node(element)
+            pointer.next = node
+
+    def _push_init_elements(self, args):
+        if args:
+            for element in args:
+                self.append(element)
 
     def __getitem__(self, index: int) -> T:
         i = 0
@@ -129,6 +134,13 @@ class LinkedList(List[T]):
             pointer.value = value
         else:
             raise IndexError(f'pop index out of range')
+
+    def __iter__(self) -> Generator[T]:
+        pointer = self.head
+        while pointer is not None:
+            value = pointer.value
+            pointer = pointer.next
+            yield value
 
     def __eq__(self, other: Any) -> bool:
         if not isinstance(other, LinkedList):

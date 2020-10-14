@@ -98,6 +98,15 @@ class TestLinkedList(TestCase):
         values = LinkedList[int](9, 5, 1, 4, 8)
         self.assertRaises(IndexError, values.__setitem__, 20, 999)
 
+    def test_iterate(self):
+        values = LinkedList[int](9, 5, 1, 4, 8)
+        new_values = LinkedList[int]()
+
+        for value in values:
+            new_values.append(value)
+
+        self.assertEqual(values, new_values)
+
     def test_equal_empty_lists(self):
         first_values = LinkedList[int]()
         second_values = LinkedList[int]()
