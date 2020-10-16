@@ -1,0 +1,63 @@
+\documentclass[kslide.tex]{subfiles}
+
+\begin{document}
+\begin{frame}{Złożoność obliczeniowa }
+        Służy do porównywania skomplikowania algorytmów w oderwaniu od środowiska, w którym będą wykonywane.\\[0.3cm]\pause 
+        
+        Mówi o tym, jak koszt wykonania algorytmu rośnie w zależności od rozmiaru danych wejściowych.\\[0.3cm]\pause 
+        
+        Może opisywać czas wykonania oraz ilość potrzebnej pamięci. Rozpatruje przypadki optymistyczny, pesymistyczny i średni.\\[0.3cm]\pause 
+        
+        Skupia się raczej na dużych i bardzo dużych danych wejściowych. 
+\end{frame}
+
+\begin{frame}{Notacja dużego O.}
+    Notacja Big O jest notacją matematyczną, która opisuje zachowanie funkcji w jej granicy, czyli, gdy argument rośnie do nieskończoności.\\[0.3cm]\pause 
+    
+    Przykładowo dla funkcji wielomianowych, zachowanie w nieskończoności będzie takie, jak stopień wielomianu, nie zważając na wartości jego współczynników.\pause 
+
+    \begin{center}
+        \begin{tabular}{ |c | c | } 
+        \hline
+        Liczba milisekund potrzebna do wykonania algorytmu & Złożoność Obliczeniowa \\ 
+        \hline \pause 
+        $5N^2 + 100$ & $O(N^2)$ \\ 
+        \hline \pause
+        
+        $0.000001N^2 + 1N - 1$ & $O(N^2)$ \\ 
+        \hline \pause
+        $100N^2 - 10000000000n$ & $O(N^2)$ \\ 
+        \hline \pause
+        $5N + 100$ & $O(N)$ \\ 
+        \hline
+        \end{tabular}
+    \end{center}
+
+        
+\end{frame}
+
+\begin{frame}{Notacja dużego O.}
+    Patrzymy na najwyższy stopień wielomianu.
+
+    \begin{center}
+        \begin{tabular}{ |c | c | } 
+        \hline
+        Liczba milisekund potrzebna do wykonania algorytmu & Złożoność Obliczeniowa \\ 
+        \hline 
+        $5\mathbf{N^2} + 100$ & $O(N^2)$ \\ 
+        \hline
+        
+        $0.000001\mathbf{N^2} + 1N - 1$ & $O(N^2)$ \\ 
+        \hline 
+        $100\mathbf{N^2} - 10000000000n$ & $O(N^2)$ \\ 
+        \hline 
+        $5\mathbf{N} + 100$ & $O(N)$ \\ 
+        \hline
+        \end{tabular}
+    \end{center}
+    
+    Ostatni algorytm będzie \textbf{asymptotycznie} najszybszy.
+        
+\end{frame}
+
+\end{document}
